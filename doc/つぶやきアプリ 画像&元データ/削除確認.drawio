@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.6">
+  <diagram name="ページ1" id="5CPyFtlq-TDKwrsMW63S">
+    <mxGraphModel dx="872" dy="431" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nsliiXBIpojQ4bj6bzJr-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" value="ヘッダーメニュー部分" vertex="1">
+          <mxGeometry height="270" width="480" x="174" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="nsliiXBIpojQ4bj6bzJr-2" parent="nsliiXBIpojQ4bj6bzJr-1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="230" width="480" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="nsliiXBIpojQ4bj6bzJr-3" parent="nsliiXBIpojQ4bj6bzJr-1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;" value="削除しますか？" vertex="1">
+          <mxGeometry height="30" width="281" x="99" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="nsliiXBIpojQ4bj6bzJr-4" parent="nsliiXBIpojQ4bj6bzJr-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" value="削除する" vertex="1">
+          <mxGeometry height="30" width="95" x="192" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="nsliiXBIpojQ4bj6bzJr-5" parent="nsliiXBIpojQ4bj6bzJr-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#6666FF;fontStyle=4" value="戻る" vertex="1">
+          <mxGeometry height="30" width="60" x="210" y="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

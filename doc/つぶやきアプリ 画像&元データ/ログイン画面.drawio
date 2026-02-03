@@ -1,0 +1,45 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.3.4">
+  <diagram name="ページ1" id="qF5hD69t_LHxWc9e9uF0">
+    <mxGraphModel dx="872" dy="431" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="OGRwg_7DrkSG1TKeAnPg-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="380" width="560" x="120" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="KG3QZhrIcX5xu1U2srfK-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" value="ログイン" vertex="1">
+          <mxGeometry height="320" width="300" x="264" y="110" as="geometry">
+            <mxRectangle height="40" width="90" x="264" y="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KG3QZhrIcX5xu1U2srfK-6" parent="KG3QZhrIcX5xu1U2srfK-1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="280" width="300" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="KG3QZhrIcX5xu1U2srfK-3" parent="KG3QZhrIcX5xu1U2srfK-1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="40" width="166" x="96" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="KG3QZhrIcX5xu1U2srfK-5" parent="KG3QZhrIcX5xu1U2srfK-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" value="ログイン" vertex="1">
+          <mxGeometry height="30" width="80" x="110" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="KG3QZhrIcX5xu1U2srfK-2" parent="KG3QZhrIcX5xu1U2srfK-1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="40" width="160" x="96" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="OGRwg_7DrkSG1TKeAnPg-1" parent="KG3QZhrIcX5xu1U2srfK-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;u&gt;&lt;font style=&quot;color: rgb(102, 102, 255);&quot;&gt;新規会員登録はこちら&lt;/font&gt;&lt;/u&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="80" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="OGRwg_7DrkSG1TKeAnPg-4" parent="KG3QZhrIcX5xu1U2srfK-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFA99C;strokeColor=light-dark(#000000,#FF7777);fontColor=#FF0000;" value="メールアドレス、パスワードが違います" vertex="1">
+          <mxGeometry height="40" width="280" x="10" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Sb4JoujoTmxjz4JxSQnh-2" parent="KG3QZhrIcX5xu1U2srfK-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="メールアドレス" vertex="1">
+          <mxGeometry height="30" width="86" x="10" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="Sb4JoujoTmxjz4JxSQnh-3" parent="KG3QZhrIcX5xu1U2srfK-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="パスワード" vertex="1">
+          <mxGeometry height="30" width="87" x="10" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="OGRwg_7DrkSG1TKeAnPg-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;fontSize=20;" value="つぶやきアプリ" vertex="1">
+          <mxGeometry height="60" width="560" x="120" y="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
