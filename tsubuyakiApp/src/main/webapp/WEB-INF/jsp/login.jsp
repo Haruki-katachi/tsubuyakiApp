@@ -25,29 +25,29 @@
 					<div class="card-header">${title}</div>
 					<div class="card-body">
 						<c:if test="${error != null}">
-							<div class="alert-danger" role="alert">${error}</div>
+							<div class="alert alert-danger" role="alert">${error}</div>
 						</c:if>
 						<c:if test="${success != null}">
-							<div class="alert-success" role="alert">${success}</div>
+							<div class="alert alert-success" role="alert">${success}</div>
 						</c:if>
 						<form action="Login" method="post">
 							<div class="mb-3">
 								<label for="email" class="form-label">E-mailアドレス</label>
 								<input type="text"
 									name="email" id="email" class="form-control"
-									value='<c:out value="${account.email}"/>'>
+									value='<c:out value="${user.email}"/>'>
 							</div>
 							<div class="mb-3">
 								<label for="password" class="form-label">パスワード</label>
 								<input type="password"
 									name="password" id="password" class="form-control"
-									value='<c:out value="${account.pasword}"/>'>
+									value='<c:out value="${user.password}"/>'>
 							</div>
 							<button type="submit" class="btn btn-outline-success">ログイン</button>
 						</form>
 					</div>
 				</div>
-				<a href="AccountResister">会員登録へ</a>
+				<a href="AccountRegister">会員登録へ</a>
 			</div>
 			<div class="col-md-6"></div>
 		</div>

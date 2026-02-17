@@ -28,4 +28,43 @@
     <filter-name>AddHeaderFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MainServlet</display-name>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>servlet.MainServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>/Main</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>LoginCheckFilter</display-name>
+    <filter-name>LoginCheckFilter</filter-name>
+    <filter-class>filter.LoginCheckFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginCheckFilter</filter-name>
+    <servlet-name>MainServlet</servlet-name>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AccountRegisterServlet</display-name>
+    <servlet-name>AccountRegisterServlet</servlet-name>
+    <servlet-class>servlet.AccountRegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountRegisterServlet</servlet-name>
+    <url-pattern>/AccountRegister</url-pattern>
+  </servlet-mapping>
 </web-app>

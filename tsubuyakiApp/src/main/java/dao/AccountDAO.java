@@ -40,4 +40,24 @@ public class AccountDAO {
 		
 		return model;
 	}
+	
+	public int create(Connection conn, AccountModel model) {
+		try {
+			String sql = "insert into accounts (email, password, name) values (?, ?, ?)";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				pStmt.setString(1, model.getEmail());
+				pStmt.setString(2, model.getPassword());
+				pStmt.setString(3, model.getName());
+				
+				pStmt.executeUpdate();
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return e.getErrorCode();
+		}
+		
+		return 1;
+	}
 }

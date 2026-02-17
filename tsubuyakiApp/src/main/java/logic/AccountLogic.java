@@ -16,4 +16,13 @@ public class AccountLogic {
 			return dao.findOne(conn, model);
 		}
 	}
+	
+	public int create(AccountModel model) throws ClassNotFoundException, SQLException {
+		try(DBConnection db = new DBConnection()) {
+			Connection conn = db.getInstance();
+			AccountDAO dao = new AccountDAO();
+			
+			return dao.create(conn, model);
+		}
+	}
 }
