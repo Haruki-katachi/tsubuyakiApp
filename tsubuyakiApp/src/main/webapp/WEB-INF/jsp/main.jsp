@@ -18,8 +18,9 @@
 					<div class="alert alert-danger">${error}</div>
 				</c:if>
 				<form action="Main" method="post">
+					<input type="hidden" name="accountId" value="${user.id}">
 					<label for="post" class="form-label">投稿したい内容</label>
-					<textarea class="form-control mb-1" id="post" name="post" rows="3"></textarea>
+					<textarea class="form-control mb-1" id="item" name="post" rows="3"></textarea>
 					<button type="submit" class="btn btn-outline-success">投稿</button>
 				</form>
 			</div>
@@ -27,10 +28,13 @@
 		<div class="card">
 			<ul>
 				<c:forEach var="post" items="posts">
-					<a class="card-body" href="#">
-						<h5 class="card-title">${post.name}</h5>
-						<p class="card-text">${post.item}</p>
-					</a>
+						<a class="card-body" href="#">
+							<h5 class="card-title">${post.postUserName}</h5>
+							<c:if test="${toId != null}">
+							<p class="card-text"><a href="#">この</a>投稿への返信<p>
+							</c:if>
+							<p class="card-text">${post.item}</p>
+						</a>
 				</c:forEach>
 			</ul>
 		</div>
