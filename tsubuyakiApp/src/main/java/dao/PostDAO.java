@@ -24,7 +24,7 @@ public class PostDAO {
 			+ "a.name, "
 			+ "a.is_deleted, "
 			+ "a.created_at, "
-			+ "a.updated_at, "
+			+ "a.updated_at "
 			+ "from posts p "
 			+ "join accounts a on p.account_id=a.id ";
 	public List<PostModel> findAll(Connection conn) {
@@ -34,7 +34,7 @@ public class PostDAO {
 					+ "where p.is_deleted=0 "
 					+ "order by p.created_at desc";
 			
-			try(PreparedStatement pStmt =conn.prepareStatement(sql)) {
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
 				try(ResultSet rs = pStmt.executeQuery()) {
 					while(rs.next()) {
 						PostModel model = new PostModel();
@@ -42,7 +42,7 @@ public class PostDAO {
 						model.setId(rs.getInt("posts.id"));
 						model.setAccountId(rs.getInt("posts.account_id"));
 						model.setItem(rs.getString("posts.item"));
-						model.setToId(rs.getInt("to_id"));
+						model.setToId((Integer)rs.getObject("to_id"));
 						model.setIsDeleted(rs.getInt("is_deleted"));
 						model.setCreatedAt(rs.getTimestamp("created_at"));
 						model.setUpdated(rs.getTimestamp("updated_at"));
@@ -58,5 +58,44 @@ public class PostDAO {
 			return null;
 		}
 		return posts;
+	}
+	
+	public PostModel findOne(Connection conn, PostModel model) {
+		try {
+			String sql = baseSQL
+					+ "where p.is_deleted=0 and "
+					+ "p.id=?";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				
+				pStmt.setInt(1, model.getId());
+				
+				try(ResultSet rs = pStmt.executeQuery()) {
+					model.setId(rs.getInt("posts.id"));
+					model.setAccountId(rs.getInt("posts.account_id"));
+					model.setItem(rs.getString("posts.item"));
+					model.setToId((Integer)rs.getObject("to_id"));
+					model.getIsDeleted();
+				}
+			}
+		}
+	}
+	
+	public int createPost(Connection conn, PostModel model) {
+		try {
+			String sql = "insert into posts (account_id, item) values (?, ?)";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				pStmt.setInt(1, model.getAccountId());
+				pStmt.setString(2, model.getItem());
+				
+				pStmt.executeUpdate();
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return e.getErrorCode();
+		}
+		return 1;
 	}
 }

@@ -14,8 +14,8 @@
 	<div class="container-md">
 		<div class="card">
 			<div class="mb-3">
-				<c:if test="${error != null}">
-					<div class="alert alert-danger">${error}</div>
+				<c:if test="${errors != null}">
+					<div class="alert alert-danger">${errors}</div>
 				</c:if>
 				<form action="Main" method="post">
 					<input type="hidden" name="accountId" value="${user.id}">
@@ -27,14 +27,15 @@
 		</div>
 		<div class="card">
 			<ul>
-				<c:forEach var="post" items="posts">
-						<a class="card-body" href="#">
-							<h5 class="card-title">${post.postUserName}</h5>
-							<c:if test="${toId != null}">
+				<c:forEach var="post" items="${postList}">
+						<div class="card-body">
+							<h5 class="card-title"><c:out value="${post.postUserName}"/></h5>
+							<c:if test="${not empty toId}">
 							<p class="card-text"><a href="#">この</a>投稿への返信<p>
 							</c:if>
-							<p class="card-text">${post.item}</p>
-						</a>
+							<p class="card-text"><c:out value="${post.item}"/></p>
+							<a href="/Individual&id=<c:out value="${post.id}"/>">詳細表示</a>
+						</div>
 				</c:forEach>
 			</ul>
 		</div>

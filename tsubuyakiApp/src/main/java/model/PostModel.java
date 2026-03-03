@@ -9,7 +9,7 @@ public class PostModel implements Serializable {
 	private int id;
 	private int accountId;
 	private String item;
-	private int toId;
+	private Integer toId;
 	private int isDeleted;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
@@ -39,7 +39,7 @@ public class PostModel implements Serializable {
 	public int getToId() {
 		return toId;
 	}
-	public void setToId(int toId) {
+	public void setToId(Integer toId) {
 		this.toId = toId;
 	}
 	

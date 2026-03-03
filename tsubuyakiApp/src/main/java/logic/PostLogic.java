@@ -17,4 +17,13 @@ public class PostLogic {
 			return dao.findAll(conn);
 		}
 	}
+	
+	public int createPost(PostModel model) throws ClassNotFoundException, SQLException {
+		try(DBConnection db = new DBConnection()) {
+			Connection conn = db.getInstance();
+			PostDAO dao = new PostDAO();
+			
+			return dao.createPost(conn, model);
+		}
+	}
 }
