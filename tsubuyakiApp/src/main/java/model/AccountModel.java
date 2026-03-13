@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class AccountModel implements Serializable {
+
 	public AccountModel() { }
 	
 	private int id;

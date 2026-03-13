@@ -7,6 +7,7 @@ import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import validation.AccountValidation;
 /**
  * Servlet implementation class AccountRegisterServlet
  */
+@WebServlet("/AccountRegister")
 public class AccountRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

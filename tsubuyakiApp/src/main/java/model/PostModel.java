@@ -36,7 +36,7 @@ public class PostModel implements Serializable {
 		this.item = item;
 	}
 	
-	public int getToId() {
+	public Integer getToId() {
 		return toId;
 	}
 	public void setToId(Integer toId) {
@@ -60,7 +60,7 @@ public class PostModel implements Serializable {
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdated(Timestamp updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	

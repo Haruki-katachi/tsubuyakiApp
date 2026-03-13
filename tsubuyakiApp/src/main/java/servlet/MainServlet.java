@@ -7,9 +7,11 @@ import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import logic.PostLogic;
 import model.PostModel;
 import validation.PostValidation;
@@ -17,6 +19,7 @@ import validation.PostValidation;
 /**
  * Servlet implementation class MainServlet
  */
+@WebServlet("/Main")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,6 +63,12 @@ public class MainServlet extends HttpServlet {
 			
 			if(validation.hasErrors()) {
 				request.setAttribute("errors", errors);
+				
+				request.setAttribute("post", post);
+				
+				PostLogic logic = new PostLogic();
+				List<PostModel> postList = logic.findAll();
+				request.setAttribute("postList", postList);
 			
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
 				dispatcher.forward(request, response);

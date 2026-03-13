@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.AccountModel;
 import model.PostModel;
 
 public class PostDAO {
@@ -31,7 +32,8 @@ public class PostDAO {
 		List<PostModel> posts = new ArrayList<PostModel>();
 		try {
 			String sql = baseSQL
-					+ "where p.is_deleted=0 "
+					+ "where p.is_deleted=0 and "
+					+ "a.is_deleted=0 "
 					+ "order by p.created_at desc";
 			
 			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
@@ -42,13 +44,127 @@ public class PostDAO {
 						model.setId(rs.getInt("posts.id"));
 						model.setAccountId(rs.getInt("posts.account_id"));
 						model.setItem(rs.getString("posts.item"));
-						model.setToId((Integer)rs.getObject("to_id"));
-						model.setIsDeleted(rs.getInt("is_deleted"));
-						model.setCreatedAt(rs.getTimestamp("created_at"));
-						model.setUpdated(rs.getTimestamp("updated_at"));
+						model.setToId((Integer)rs.getObject("posts.to_id"));
+						model.setIsDeleted(rs.getInt("posts.is_deleted"));
+						model.setCreatedAt(rs.getTimestamp("posts.created_at"));
+						model.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
 						model.setPostUserName(rs.getString("accounts.name"));
 						
 						posts.add(model);
+					}
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return null;
+		}
+		return posts;
+	}
+	
+	public List<PostModel> findByAccountId(Connection conn, PostModel model) {
+		List<PostModel> posts = new ArrayList<PostModel>();
+		try {
+			String sql = baseSQL
+					+ "where p.is_deleted=0 and "
+					+ "a.is_deleted=0 and "
+					+ "p.account_id=? "
+					+ "order by p.created_at desc";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				
+				pStmt.setInt(1, model.getAccountId());
+				
+				try(ResultSet rs = pStmt.executeQuery()) {
+					while(rs.next()) {
+						PostModel model2 = new PostModel();
+						
+						model2.setId(rs.getInt("posts.id"));
+						model2.setAccountId(rs.getInt("posts.account_id"));
+						model2.setItem(rs.getString("posts.item"));
+						model2.setToId((Integer)rs.getObject("posts.to_id"));
+						model2.setIsDeleted(rs.getInt("posts.is_deleted"));
+						model2.setCreatedAt(rs.getTimestamp("created_at"));
+						model2.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
+						model2.setPostUserName(rs.getString("accounts.name"));
+						
+						posts.add(model2);
+					}
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return null;
+		}
+		return posts;
+	}
+	
+	public List<PostModel> findByAccountId(Connection conn, AccountModel model) {
+		List<PostModel> posts = new ArrayList<PostModel>();
+		try {
+			String sql = baseSQL
+					+ "where p.is_deleted=0 and "
+					+ "a.is_deleted=0 and "
+					+ "p.account_id=? "
+					+ "order by p.created_at desc";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				
+				pStmt.setInt(1, model.getId());
+				
+				try(ResultSet rs = pStmt.executeQuery()) {
+					while(rs.next()) {
+						PostModel model2 = new PostModel();
+						
+						model2.setId(rs.getInt("posts.id"));
+						model2.setAccountId(rs.getInt("posts.account_id"));
+						model2.setItem(rs.getString("posts.item"));
+						model2.setToId((Integer)rs.getObject("posts.to_id"));
+						model2.setIsDeleted(rs.getInt("posts.is_deleted"));
+						model2.setCreatedAt(rs.getTimestamp("posts.created_at"));
+						model2.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
+						model2.setPostUserName(rs.getString("accounts.name"));
+						
+						posts.add(model2);
+					}
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return null;
+		}
+		return posts;
+	}
+	
+	public List<PostModel> findByReply(Connection conn, PostModel model) {
+		List<PostModel> posts = new ArrayList<PostModel>();
+		try {
+			String sql = baseSQL
+					+ "where p.to_id=? and "
+					+ "p.is_deleted=0 and "
+					+ "a.is_deleted=0 "
+					+ "order by p.created_at desc";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				
+				pStmt.setInt(1, model.getId());
+				
+				try(ResultSet rs = pStmt.executeQuery()) {
+					while(rs.next()) {
+						PostModel model2 = new PostModel();
+						
+						model2.setId(rs.getInt("posts.id"));
+						model2.setAccountId(rs.getInt("posts.account_id"));
+						model2.setItem(rs.getString("posts.item"));
+						model2.setToId((Integer)rs.getObject("posts.to_id"));
+						model2.setIsDeleted(rs.getInt("posts.is_deleted"));
+						model2.setCreatedAt(rs.getTimestamp("posts.created_at"));
+						model2.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
+						model2.setPostUserName(rs.getString("accounts.name"));
+						
+						posts.add(model2);
 					}
 				}
 			}
@@ -64,6 +180,7 @@ public class PostDAO {
 		try {
 			String sql = baseSQL
 					+ "where p.is_deleted=0 and "
+					+ "a.is_deleted=0 and "
 					+ "p.id=?";
 			
 			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
@@ -71,14 +188,24 @@ public class PostDAO {
 				pStmt.setInt(1, model.getId());
 				
 				try(ResultSet rs = pStmt.executeQuery()) {
-					model.setId(rs.getInt("posts.id"));
-					model.setAccountId(rs.getInt("posts.account_id"));
-					model.setItem(rs.getString("posts.item"));
-					model.setToId((Integer)rs.getObject("to_id"));
-					model.getIsDeleted();
+					if(rs.next()) {
+						model.setId(rs.getInt("posts.id"));
+						model.setAccountId(rs.getInt("posts.account_id"));
+						model.setItem(rs.getString("posts.item"));
+						model.setToId((Integer)rs.getObject("posts.to_id"));
+						model.setIsDeleted(rs.getInt("posts.is_deleted"));
+						model.setCreatedAt(rs.getTimestamp("posts.created_at"));
+						model.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
+						model.setPostUserName(rs.getString("accounts.name"));
+					}
 				}
 			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return null;
 		}
+		return model;
 	}
 	
 	public int createPost(Connection conn, PostModel model) {
@@ -97,5 +224,38 @@ public class PostDAO {
 			return e.getErrorCode();
 		}
 		return 1;
+	}
+	
+	public int createReply(Connection conn, PostModel model) {
+		try {
+			String sql = "insert into posts (account_id, item, to_id) values (?, ?, ?)";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				pStmt.setInt(1, model.getAccountId());
+				pStmt.setString(2, model.getItem());
+				pStmt.setInt(3, model.getToId());
+				
+				pStmt.executeUpdate();
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			 return e.getErrorCode();
+		}
+		return 1;
+	}
+	
+	public void deletePost(Connection conn, PostModel model) {
+		try {
+			String sql = "update posts set is_deleted=1 where id=?";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				pStmt.setInt(1, model.getId());
+				
+				pStmt.executeUpdate();
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

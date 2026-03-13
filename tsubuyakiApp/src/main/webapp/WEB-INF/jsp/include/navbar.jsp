@@ -9,10 +9,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link" href="GoodList">いいねしたつぶやき</a>
+					<a class="nav-link" href="UserGoodList">いいねしたつぶやき</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="PostList">投稿したつぶやき</a>
+					<a class="nav-link" href="UserPostList">投稿したつぶやき</a>
 				</li>
 			</ul>
 			<span class="navbar-text">
