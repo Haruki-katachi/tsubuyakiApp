@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import logic.AccountLogic;
 import logic.PostLogic;
 import model.AccountModel;
 import model.PostModel;
@@ -15,8 +14,6 @@ import model.PostModel;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
-import dao.AccountDAO;
 
 /**
  * Servlet implementation class UserPostListServlet

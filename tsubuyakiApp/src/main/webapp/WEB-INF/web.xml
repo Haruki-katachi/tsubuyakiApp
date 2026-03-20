@@ -43,18 +43,39 @@
   </filter>
   <filter-mapping>
     <filter-name>LoginCheckFilter</filter-name>
-    <!-- <servlet-name>MainServlet</servlet-name> -->
     <url-pattern>/Main</url-pattern>
   </filter-mapping>
   <filter-mapping>
+    <filter-name>LoginCheckFilter</filter-name>
+    <servlet-name>IndividualServlet</servlet-name>
+    <url-pattern>/Individual</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>/UserPostList</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
   	<filter-name>LoginCheckFilter</filter-name>
-  	<servlet-name>IndividualServlet</servlet-name>
-  	<url-pattern>/Individual</url-pattern>
+  	<url-pattern>/UserGoodList</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>/Good</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>LoginCheckFilter</filter-name>
+  	<url-pattern>/Delete</url-pattern>
   </filter-mapping>
   <servlet>
     <description></description>
     <display-name>AccountRegisterServlet</display-name>
     <servlet-name>AccountRegisterServlet</servlet-name>
     <servlet-class>servlet.AccountRegisterServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>UserGoodListServlet</display-name>
+    <servlet-name>UserGoodListServlet</servlet-name>
+    <servlet-class>servlet.UserGoodListServlet</servlet-class>
   </servlet>
 </web-app>

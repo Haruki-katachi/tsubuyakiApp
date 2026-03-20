@@ -16,23 +16,33 @@
 	<div class="container-md">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title">${post.postUserName}</h5>
-				<c:if test="${not empty post.toId}">
-					<p class="card-text text-secondary"><a href="/tsubuyakiApp/Individual?id=<c:out value="${post.toId}"/>">この</a>投稿への返信</p>
-				</c:if>
-				<p class="card-text" style="white-space: pre-wrap;">${post.item}</p>
 				<c:choose>
-					<c:when test="${user.id == post.accountId}">
-						<form action="Delete" method="get">
-							<input type="hidden" name="postId" value="${post.id}">
-							<button type="submit" class="btn btn-outline-danger">削除</button>
-						</form>
+					<c:when test="${not empty post}">
+						<h5 class="card-title">${post.postUserName}</h5>
+						<c:if test="${not empty post.toId}">
+							<p class="card-text text-secondary"><a href="/tsubuyakiApp/Individual?id=<c:out value="${post.toId}"/>">この</a>投稿への返信</p>
+						</c:if>
+						<p class="card-text" style="white-space: pre-wrap;">${post.item}</p>
+						<p class="card-text">いいね数：${goodCount}</p>
+						<c:choose>
+							<c:when test="${user.id == post.accountId}">
+								<form action="Delete" method="get">
+									<input type="hidden" name="postId" value="${post.id}">
+									<button type="submit" class="btn btn-outline-danger">削除</button>
+								</form>
+							</c:when>
+							<c:when test="${user.id != post.accountId}">
+								<form action="Good" method="post">
+									<input type="hidden" name="accountId" value="${user.id}">
+									<input type="hidden" name="postId" value="${post.id}">
+									<input type="checkbox" class="btn-check" id="isGood" name="isGood" onchange="this.form.submit()" value="1"<c:if test="${good.isGood == 1}"> checked</c:if>>
+									<label class="btn btn-outline-success" for="isGood">いいね</label>
+								</form>
+							</c:when>
+						</c:choose>
 					</c:when>
-					<c:when test="${user.id != post.accountId}">
-						<form action="Good" method="post">
-							<input type="hidden" name="postId" value="${post.id}">
-							<button type="submit" class="btn <%-- いいねしてるか否かでボタンデザインを変える --%>btn-outline-success">いいね</button>
-						</form>
+					<c:when test="${empty post}">
+						<p>投稿が見つかりません</p>
 					</c:when>
 				</c:choose>
 			</div>

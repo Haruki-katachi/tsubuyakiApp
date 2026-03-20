@@ -11,7 +11,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import logic.GoodLogic;
 import logic.PostLogic;
+import model.AccountModel;
+import model.GoodModel;
 import model.PostModel;
 import validation.PostValidation;
 
@@ -42,6 +46,16 @@ public class IndividualServlet extends HttpServlet {
 			post = logic.findOne(post);
 			
 			request.setAttribute("post", post);
+			
+			HttpSession session = request.getSession();
+			AccountModel user = (AccountModel)session.getAttribute("user");
+			
+			GoodLogic logic2 = new GoodLogic();
+			GoodModel good = logic2.findOne(user, post);
+			request.setAttribute("good", good);
+			
+			int goodCount = logic2.goodCount(good.getPostId());
+			request.setAttribute("goodCount", goodCount);
 			
 			List<PostModel> replyList = logic.findByReply(post);
 			
@@ -83,6 +97,17 @@ public class IndividualServlet extends HttpServlet {
 				
 				request.setAttribute("post", post);
 				
+				HttpSession session = request.getSession();
+				AccountModel user = (AccountModel)session.getAttribute("user");
+				
+				GoodLogic logic2 = new GoodLogic();
+				GoodModel good = logic2.findOne(user, post);
+				
+				request.setAttribute("good", good);
+				
+				int goodCount = logic2.goodCount(good.getPostId());
+				request.setAttribute("goodCount", goodCount);
+				
 				List<PostModel> replyList = logic.findByReply(post);
 				
 				request.setAttribute("replyList", replyList);
@@ -112,6 +137,17 @@ public class IndividualServlet extends HttpServlet {
 			post = logic.findOne(post);
 			
 			request.setAttribute("post", post);
+			
+			HttpSession session = request.getSession();
+			AccountModel user = (AccountModel)session.getAttribute("user");
+			
+			GoodLogic logic2 = new GoodLogic();
+			GoodModel good = logic2.findOne(user, post);
+			
+			request.setAttribute("good", good);
+			
+			int goodCount = logic2.goodCount(good.getPostId());
+			request.setAttribute("goodCount", goodCount);
 			
 			List<PostModel> replyList = logic.findByReply(post);
 			

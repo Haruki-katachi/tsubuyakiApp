@@ -37,6 +37,15 @@ public class PostLogic {
 		}
 	}
 	
+	public List<PostModel> findByAccountIdIsGood(AccountModel model) throws ClassNotFoundException, SQLException {
+		try(DBConnection db = new DBConnection()) {
+			Connection conn = db.getInstance();
+			PostDAO dao = new PostDAO();
+			
+			return dao.findByAccountIdIsGood(conn, model);
+		}
+	}
+	
 	public List<PostModel> findByReply(PostModel model) throws ClassNotFoundException, SQLException {
 		try(DBConnection db = new DBConnection()) {
 			Connection conn = db.getInstance();

@@ -30,4 +30,28 @@ public class GoodModel implements Serializable {
 	public int getPostId() {
 		return postId;
 	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
+	
+	public int getIsGood() {
+		return isGood;
+	}
+	public void setIsGood(int isGood) {
+		this.isGood = isGood;
+	}
+	
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+	
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 }

@@ -176,6 +176,67 @@ public class PostDAO {
 		return posts;
 	}
 	
+	public List<PostModel> findByAccountIdIsGood(Connection conn, AccountModel model) {
+		List<PostModel> posts = new ArrayList<PostModel>();
+		try {
+			String sql = "select "
+					+ "p.id, "
+					+ "p.account_id, "
+					+ "p.item, "
+					+ "p.to_id, "
+					+ "p.is_deleted, "
+					+ "p.created_at, "
+					+ "p.updated_at, "
+					+ "a.id, "
+					+ "a.email, "
+					+ "a.password, "
+					+ "a.name, "
+					+ "a.is_deleted, "
+					+ "a.created_at, "
+					+ "a.updated_at, "
+					+ "g.id, "
+					+ "g.account_id, "
+					+ "g.post_id, "
+					+ "g.is_good, "
+					+ "g.created_at, "
+					+ "g.updated_at "
+					+ "from posts p "
+					+ "join accounts a on p.account_id=a.id "
+					+ "left join good_table g on p.id=g.post_id "
+					+ "where g.account_id=? and "
+					+ "g.is_good=1 and "
+					+ "p.is_deleted=0 and "
+					+ "a.is_deleted=0 "
+					+ "order by g.updated_at desc";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				pStmt.setInt(1, model.getId());
+				
+				try(ResultSet rs = pStmt.executeQuery()) {
+					while(rs.next()) {
+						PostModel model2 = new PostModel();
+						
+						model2.setId(rs.getInt("posts.id"));
+						model2.setAccountId(rs.getInt("posts.account_id"));
+						model2.setItem(rs.getString("posts.item"));
+						model2.setToId((Integer)rs.getObject("posts.to_id"));
+						model2.setIsDeleted(rs.getInt("posts.is_deleted"));
+						model2.setCreatedAt(rs.getTimestamp("posts.created_at"));
+						model2.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
+						model2.setPostUserName(rs.getString("accounts.name"));
+						
+						posts.add(model2);
+					}
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return null;
+		}
+		return posts;
+	}
+	
 	public PostModel findOne(Connection conn, PostModel model) {
 		try {
 			String sql = baseSQL
