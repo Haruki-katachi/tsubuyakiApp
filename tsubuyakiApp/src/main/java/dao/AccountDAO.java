@@ -60,4 +60,24 @@ public class AccountDAO {
 		
 		return 1;
 	}
+	
+	public int update(Connection conn, AccountModel model) {
+		try {
+			String sql = "update accounts set email=?, password=?, name=? where id=?";
+			
+			try(PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				pStmt.setString(1, model.getEmail());
+				pStmt.setString(2, model.getPassword());
+				pStmt.setString(3, model.getName());
+				pStmt.setInt(4, model.getId());
+				
+				pStmt.executeUpdate();
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			
+			return e.getErrorCode();
+		}
+		return 1;
+	}
 }

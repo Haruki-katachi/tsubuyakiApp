@@ -55,16 +55,20 @@
     <url-pattern>/UserPostList</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>/UserGoodList</url-pattern>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>/UserGoodList</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>/Good</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>/Delete</url-pattern>
   </filter-mapping>
   <filter-mapping>
   	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>/Good</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>/Delete</url-pattern>
+  	<url-pattern>/AccountUpdate</url-pattern>
   </filter-mapping>
   <servlet>
     <description></description>
@@ -77,5 +81,11 @@
     <display-name>UserGoodListServlet</display-name>
     <servlet-name>UserGoodListServlet</servlet-name>
     <servlet-class>servlet.UserGoodListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>AccountUpdateServlet</display-name>
+    <servlet-name>AccountUpdateServlet</servlet-name>
+    <servlet-class>servlet.AccountUpdateServlet</servlet-class>
   </servlet>
 </web-app>

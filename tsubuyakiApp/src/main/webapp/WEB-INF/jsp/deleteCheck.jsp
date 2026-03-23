@@ -18,7 +18,7 @@
 					<h5 class="card-header">${title}</h5>
 					<div class="card-body">
 						<p class="card-text">削除しますか？</p>
-						<form action="Delete" method="post">
+						<form action="PostDelete" method="post">
 							<input type="hidden" name="postId" value="<c:out value="${post.id}"/>">
 							<button type="submit" class="btn btn-outline-danger mb-3">削除</button>
 						</form>

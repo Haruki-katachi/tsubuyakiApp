@@ -47,6 +47,15 @@ public class IndividualServlet extends HttpServlet {
 			
 			request.setAttribute("post", post);
 			
+			if(post == null) {
+				request.setAttribute("error", "投稿が見つかりません");
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+				dispatcher.forward(request, response);
+				
+				return;
+			}
+			
 			HttpSession session = request.getSession();
 			AccountModel user = (AccountModel)session.getAttribute("user");
 			
@@ -95,6 +104,14 @@ public class IndividualServlet extends HttpServlet {
 				PostLogic logic = new PostLogic();
 				post = logic.findOne(post);
 				
+				if(post == null) {
+					request.setAttribute("error", "投稿が見つかりません");
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+					dispatcher.forward(request, response);
+					return;
+				}
+				
 				request.setAttribute("post", post);
 				
 				HttpSession session = request.getSession();
@@ -135,6 +152,14 @@ public class IndividualServlet extends HttpServlet {
 			post.setId((Integer)toId);
 			
 			post = logic.findOne(post);
+			
+			if(post == null) {
+				request.setAttribute("error", "投稿が見つかりません");
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 			
 			request.setAttribute("post", post);
 			

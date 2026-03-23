@@ -16,7 +16,7 @@
 				</li>
 			</ul>
 			<span class="navbar-text">
-				ようこそ、${user.name}さん
+				ようこそ、<a href="AccountUpdate">${user.name}</a>さん
 			</span>
 			<a class="btn btn-outline-primary" href="Logout">ログアウト</a>
 		</div>

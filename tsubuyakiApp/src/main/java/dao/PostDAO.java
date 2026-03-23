@@ -258,6 +258,8 @@ public class PostDAO {
 						model.setCreatedAt(rs.getTimestamp("posts.created_at"));
 						model.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
 						model.setPostUserName(rs.getString("accounts.name"));
+					} else {
+						return null;
 					}
 				}
 			}
