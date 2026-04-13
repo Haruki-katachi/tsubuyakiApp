@@ -21,10 +21,10 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="card my-3">
-					<div class="card-header">${title}</div>
+					<div class="card-header"><c:out value="${title}"/></div>
 					<div class="card-body">
 						<c:if test="${db_error != null}">
-							<div class="alert alert-danger">${db_error}</div>
+							<div class="alert alert-danger"><c:out value="${db_error}"/></div>
 						</c:if>
 						<form action="AccountRegister" method="post">
 							<div class="mb-3">
@@ -32,24 +32,24 @@
 								<input type="text"
 									name="email" id="email"
 									class='form-control<c:if test="${errors.email != null}"> is-invalid</c:if>'
-									value="${user.email}">
-								<div id="email" class="invalid-feedback">${errors.email}</div>
+									value="<c:out value="${user.email}"/>">
+								<div id="email" class="invalid-feedback"><c:out value="${errors.email}"/></div>
 							</div>
 							<div class="mb-3">
 								<label for="password" class="form-label">パスワード</label>
 								<input type="password"
 									name="password" id="password"
 									class="form-control<c:if test='${errors.password != null}'> is-invalid</c:if>"
-									value="${user.password}">
-								<div id="password" class="invalid-feedback">${errors.password}</div>
+									value="<c:out value="${user.password}"/>">
+								<div id="password" class="invalid-feedback"><c:out value="${errors.password}"/></div>
 							</div>
 							<div class="mb-3">
 								<label for="name" class="form-label">ニックネーム</label>
 								<input type="text"
 									name="name" id="name"
 									class="form-control<c:if test='${errors.name != null}'> is-invalid</c:if>"
-									value="${user.name}">
-								<div id="name" class="invalid-feedback">${errors.name}</div>
+									value="<c:out value="${user.name}"/>">
+								<div id="name" class="invalid-feedback"><c:out value="${errors.name}"/></div>
 							</div>
 							<button type="submit" class="btn btn-outline-success">登録</button>
 						</form>

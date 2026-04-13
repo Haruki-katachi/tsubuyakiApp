@@ -7,8 +7,18 @@ import java.sql.SQLException;
 
 import model.AccountModel;
 
+/**
+ * accountsテーブルを扱うクラス
+ */
 public class AccountDAO {
 	
+	/**
+	 * emailとpasswordでisDeletedが0のデータを探して返す
+	 * 
+	 * @param conn
+	 * @param model email, password
+	 * @return accountデータ
+	 */
 	public AccountModel findOne(Connection conn, AccountModel model) {
 		
 		try {
@@ -41,6 +51,13 @@ public class AccountDAO {
 		return model;
 	}
 	
+	/**
+	 * modelにセットされたemail,password,nameの内容でaccountsテーブルに保存する
+	 * 
+	 * @param conn
+	 * @param model email, password, name
+	 * @return 正常に実行できたら1,失敗したらエラーコードを返す
+	 */
 	public int create(Connection conn, AccountModel model) {
 		try {
 			String sql = "insert into accounts (email, password, name) values (?, ?, ?)";
@@ -61,6 +78,12 @@ public class AccountDAO {
 		return 1;
 	}
 	
+	/**
+	 * モデルのidのデータをemail,password,nameの内容に更新する
+	 * @param conn
+	 * @param model id=更新対象のデータのid email,password,name=更新したい内容
+	 * @return 正常に更新したら1,失敗したらエラーコードを返す
+	 */
 	public int update(Connection conn, AccountModel model) {
 		try {
 			String sql = "update accounts set email=?, password=?, name=? where id=?";

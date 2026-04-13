@@ -3,7 +3,9 @@ package validation;
 import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
-
+/**
+ * account用バリデーションクラス
+ */
 public class AccountValidation extends Validation {
 
 	public AccountValidation(HttpServletRequest request) {

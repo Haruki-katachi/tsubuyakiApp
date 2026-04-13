@@ -3,7 +3,9 @@ package validation;
 import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
-
+/**
+ * post用バリデーションクラス
+ */
 public class PostValidation extends Validation {
 	
 	public PostValidation(HttpServletRequest request) {
@@ -26,6 +28,8 @@ public class PostValidation extends Validation {
 			if(!ValidationUtil.isMaxLength(request.getParameter("reply"), 280)) {
 				this.errors.put("post", "投稿は280文字以下にしてください");
 			}
+		} else {
+			this.errors.put("post", "エラーが発生しました");
 		}
 		
 		return errors;

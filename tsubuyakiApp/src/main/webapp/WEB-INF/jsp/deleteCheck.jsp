@@ -15,7 +15,7 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="card text-center">
-					<h5 class="card-header">${title}</h5>
+					<h5 class="card-header"><c:out value="${title}"/></h5>
 					<div class="card-body">
 						<p class="card-text">削除しますか？</p>
 						<form action="PostDelete" method="post">

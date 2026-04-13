@@ -14,12 +14,13 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="card">
-					<div class="card-header">${title}</div>
+					<div class="card-header"><c:out value="${title}"/></div>
 					<div class="card-body">
-						<div class="alert alert-danger">${error}</div>
+						<div class="alert alert-danger"><c:out value="${error}"/></div>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-3"></div>
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/jsp/include/js.jsp" %>

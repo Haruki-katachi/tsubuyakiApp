@@ -46,6 +46,11 @@ public class MainServlet extends HttpServlet {
 			return;
 		} catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 		
 	}
@@ -80,20 +85,18 @@ public class MainServlet extends HttpServlet {
 			model.setItem(post);
 		
 			PostLogic logic = new PostLogic();
-			int ret = logic.createPost(model);
-			if(ret != 1) {
-				errors.put("dbError", "エラーが発生しました");
-				request.setAttribute("errors", errors);
-			}
-			List<PostModel> postList = logic.findAll();
-			request.setAttribute("postList", postList);
+			logic.createPost(model);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect("Main");
 			
 			return;
 		} catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
 

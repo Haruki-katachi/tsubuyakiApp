@@ -16,7 +16,7 @@
 				</li>
 			</ul>
 			<span class="navbar-text">
-				ようこそ、<a href="AccountUpdate">${user.name}</a>さん
+				ようこそ、<a href="AccountUpdate"><c:out value="${sessionScope.user.name}"/></a>さん
 			</span>
 			<a class="btn btn-outline-primary" href="Logout">ログアウト</a>
 		</div>

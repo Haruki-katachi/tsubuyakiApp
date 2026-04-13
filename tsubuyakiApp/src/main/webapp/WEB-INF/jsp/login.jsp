@@ -22,13 +22,13 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="card my-3">
-					<div class="card-header">${title}</div>
+					<div class="card-header"><c:out value="${title}"/></div>
 					<div class="card-body">
 						<c:if test="${error != null}">
-							<div class="alert alert-danger" role="alert">${error}</div>
+							<div class="alert alert-danger" role="alert"><c:out value="${error}"/></div>
 						</c:if>
 						<c:if test="${success != null}">
-							<div class="alert alert-success" role="alert">${success}</div>
+							<div class="alert alert-success" role="alert"><c:out value="${success}"/></div>
 						</c:if>
 						<form action="Login" method="post">
 							<div class="mb-3">

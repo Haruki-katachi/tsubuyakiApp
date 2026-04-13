@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,11 +45,7 @@ public class PostGoodServlet extends HttpServlet {
 			GoodLogic logic = new GoodLogic();
 			GoodModel good = logic.findOne(accountId, postId);
 			if(good == null) {
-				if(logic.create(accountId, postId) != 1) {
-					//TODO:エラー処理の実装
-					
-					return;
-				}
+				logic.create(accountId, postId);
 				response.sendRedirect("/tsubuyakiApp/Individual?id=" + postId);
 				
 				return;
@@ -59,17 +56,18 @@ public class PostGoodServlet extends HttpServlet {
 					good.setIsGood(1);
 				}
 				
-				if(logic.update(good) != 1) {
-					//TODO:エラー処理の実装
-					
-					return;
-				}
+				logic.update(good);
 				response.sendRedirect("/tsubuyakiApp/Individual?id=" + postId);
 				
 				return;
 			}
 		} catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
 

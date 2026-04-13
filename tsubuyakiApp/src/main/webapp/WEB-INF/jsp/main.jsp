@@ -15,16 +15,13 @@
 		<div class="card">
 			<div class="mb-3">
 				<c:if test="${errors != null}">
-					<c:choose>
-						<c:when test="${errors.post != null}"><div class="alert alert-danger">${errors.post}</div></c:when>
-						<c:when test="${errors.dbError != null}"><div class="alert alert-danger">${errors.dbError}</div></c:when>
-					</c:choose>
+					<div class="alert alert-danger"><c:out value="${errors.post}"/></div>
 				</c:if>
 				<form action="Main" method="post">
-					<input type="hidden" name="accountId" value="${user.id}">
+					<input type="hidden" name="accountId" value="<c:out value="${user.id}"/>">
 					<div class="mb-3">
 						<label for="post" class="form-label">投稿したい内容</label>
-						<textarea class="form-control" id="post" name="post" rows="3">${post}</textarea>
+						<textarea class="form-control" id="post" name="post" rows="3"><c:out value="${post}"/></textarea>
 					</div>
 					<button type="submit" class="btn btn-outline-success">投稿</button>
 				</form>

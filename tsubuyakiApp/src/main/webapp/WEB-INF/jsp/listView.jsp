@@ -15,7 +15,7 @@
 	<%@ include file="/WEB-INF/jsp/include/navbar.jsp" %>
 	<div class="container-md">
 		<div class="card">
-			<h4 class="card-header">${title}</h4>
+			<h4 class="card-header"><c:out value="${title}"/></h4>
 				<ul class="list-group list-group-flush">
 					<c:forEach var="post" items="${postList}">
 						<a href="/tsubuyakiApp/Individual?id=<c:out value="${post.id}"/>" class="list-group-item">

@@ -16,23 +16,23 @@
 	<div class="container-md">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title">${post.postUserName}</h5>
+				<h5 class="card-title"><c:out value="${post.postUserName}"/></h5>
 				<c:if test="${not empty post.toId}">
 					<p class="card-text text-secondary"><a href="/tsubuyakiApp/Individual?id=<c:out value="${post.toId}"/>">この</a>投稿への返信</p>
 				</c:if>
-				<p class="card-text" style="white-space: pre-wrap;">${post.item}</p>
-				<p class="card-text">いいね数：${goodCount}</p>
+				<p class="card-text" style="white-space: pre-wrap;"><c:out value="${post.item}"/></p>
+				<p class="card-text">いいね数：<c:out value="${goodCount}"/></p>
 				<c:choose>
 					<c:when test="${user.id == post.accountId}">
 						<form action="PostDelete" method="get">
-							<input type="hidden" name="postId" value="${post.id}">
+							<input type="hidden" name="postId" value="<c:out value="${post.id}"/>">
 							<button type="submit" class="btn btn-outline-danger">削除</button>
 						</form>
 					</c:when>
 					<c:when test="${user.id != post.accountId}">
 						<form action="PostGood" method="post">
-							<input type="hidden" name="accountId" value="${user.id}">
-							<input type="hidden" name="postId" value="${post.id}">
+							<input type="hidden" name="accountId" value="<c:out value="${user.id}"/>">
+							<input type="hidden" name="postId" value="<c:out value="${post.id}"/>">
 							<input type="checkbox" class="btn-check" id="isGood" name="isGood" onchange="this.form.submit()" value="1"<c:if test="${good.isGood == 1}"> checked</c:if>>
 							<label class="btn btn-outline-success" for="isGood">いいね</label>
 						</form>
@@ -43,17 +43,14 @@
 		<div class="card">
 			<div class="mb-3">
 				<c:if test="${errors != null}">
-					<c:choose>
-						<c:when test="${errors.post != null}"><div class="alert alert-danger">${errors.post}</div></c:when>
-						<c:when test="${errors.dbError}"><div class="alert alert-danger">${errors.dbError}</div></c:when>
-					</c:choose>
+					<div class="alert alert-danger"><c:out value="${errors.post}"/></div>
 				</c:if>
 				<form action="Individual" method="post">
-					<input type="hidden" name="accountId" value="${user.id}">
-					<input type="hidden" name="toId" value="${post.id}">
+					<input type="hidden" name="accountId" value="<c:out value="${user.id}"/>">
+					<input type="hidden" name="toId" value="<c:out value="${post.id}"/>">
 					<div class="mb-3">
 						<label for="reply" class="form-label">返信したい内容</label>
-						<textarea rows="3" class="form-control" id="reply" name="reply">${reply}</textarea>
+						<textarea rows="3" class="form-control" id="reply" name="reply"><c:out value="${reply}"/></textarea>
 					</div>
 					<button type="submit" class="btn btn-outline-success">返信</button>
 				</form>

@@ -36,6 +36,11 @@ public class UserPostListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession();
+			if(session.getAttribute("user") == null) {
+				response.sendRedirect("Login");
+				
+				return;
+			}
 			AccountModel user = (AccountModel)session.getAttribute("user");
 			PostLogic logic = new PostLogic();
 			
@@ -50,6 +55,11 @@ public class UserPostListServlet extends HttpServlet {
 			return;
 		} catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
 

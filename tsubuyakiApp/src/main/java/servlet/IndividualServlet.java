@@ -57,13 +57,20 @@ public class IndividualServlet extends HttpServlet {
 			}
 			
 			HttpSession session = request.getSession();
+			if(session.getAttribute("user") == null) {
+				response.sendRedirect("Login");
+				
+				return;
+			}
 			AccountModel user = (AccountModel)session.getAttribute("user");
 			
 			GoodLogic logic2 = new GoodLogic();
 			GoodModel good = logic2.findOne(user, post);
-			request.setAttribute("good", good);
-			
-			int goodCount = logic2.goodCount(good.getPostId());
+			int goodCount = 0;
+			if(good != null) {
+				request.setAttribute("good", good);
+			}
+			goodCount = logic2.goodCount(post.getId());
 			request.setAttribute("goodCount", goodCount);
 			
 			List<PostModel> replyList = logic.findByReply(post);
@@ -115,13 +122,18 @@ public class IndividualServlet extends HttpServlet {
 				request.setAttribute("post", post);
 				
 				HttpSession session = request.getSession();
+				if(session.getAttribute("user") == null) {
+					response.sendRedirect("Login");
+					
+					return;
+				}
 				AccountModel user = (AccountModel)session.getAttribute("user");
 				
 				GoodLogic logic2 = new GoodLogic();
 				GoodModel good = logic2.findOne(user, post);
-				
-				request.setAttribute("good", good);
-				
+				if(good != null) {
+					request.setAttribute("good", good);
+				}
 				int goodCount = logic2.goodCount(good.getPostId());
 				request.setAttribute("goodCount", goodCount);
 				
@@ -142,50 +154,18 @@ public class IndividualServlet extends HttpServlet {
 			model.setItem(reply);
 			
 			PostLogic logic = new PostLogic();
-			int ret = logic.createRply(model);
-			if(ret != 1) {
-				errors.put("dbError", "エラーが発生しました");
-				request.setAttribute("errors", errors);
-			}
+			logic.createReply(model);
 			
-			PostModel post = new PostModel();
-			post.setId((Integer)toId);
-			
-			post = logic.findOne(post);
-			
-			if(post == null) {
-				request.setAttribute("error", "投稿が見つかりません");
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
-				dispatcher.forward(request, response);
-				return;
-			}
-			
-			request.setAttribute("post", post);
-			
-			HttpSession session = request.getSession();
-			AccountModel user = (AccountModel)session.getAttribute("user");
-			
-			GoodLogic logic2 = new GoodLogic();
-			GoodModel good = logic2.findOne(user, post);
-			
-			request.setAttribute("good", good);
-			
-			int goodCount = logic2.goodCount(good.getPostId());
-			request.setAttribute("goodCount", goodCount);
-			
-			List<PostModel> replyList = logic.findByReply(post);
-			
-			request.setAttribute("replyList", replyList);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/individual.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect("Individual?id=" + model.getToId());
 			
 			return;
 		} catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			
-			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
 

@@ -47,6 +47,10 @@ public class PostDeleteServlet extends HttpServlet {
 		} catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
 
@@ -65,6 +69,11 @@ public class PostDeleteServlet extends HttpServlet {
 			return;
 		} catch(SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
+			return;
 		}
 	}
 

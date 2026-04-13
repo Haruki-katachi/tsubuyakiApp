@@ -10,6 +10,9 @@ import java.util.List;
 import model.AccountModel;
 import model.PostModel;
 
+/**
+ * postsテーブルを扱うクラス
+ */
 public class PostDAO {
 	private String baseSQL = "select "
 			+ "p.id, "
@@ -28,6 +31,13 @@ public class PostDAO {
 			+ "a.updated_at "
 			+ "from posts p "
 			+ "join accounts a on p.account_id=a.id ";
+	
+	/**
+	 * すべてのpostデータのリストを返す
+	 * 
+	 * @param conn
+	 * @return postデータのリスト
+	 */
 	public List<PostModel> findAll(Connection conn) {
 		List<PostModel> posts = new ArrayList<PostModel>();
 		try {
@@ -62,6 +72,13 @@ public class PostDAO {
 		return posts;
 	}
 	
+	/**
+	 * モデルのaccountIdでデータを探しリストを返す
+	 * 
+	 * @param conn
+	 * @param model accountId
+	 * @return account_idが一致するpostデータのリスト
+	 */
 	public List<PostModel> findByAccountId(Connection conn, PostModel model) {
 		List<PostModel> posts = new ArrayList<PostModel>();
 		try {
@@ -84,7 +101,7 @@ public class PostDAO {
 						model2.setItem(rs.getString("posts.item"));
 						model2.setToId((Integer)rs.getObject("posts.to_id"));
 						model2.setIsDeleted(rs.getInt("posts.is_deleted"));
-						model2.setCreatedAt(rs.getTimestamp("created_at"));
+						model2.setCreatedAt(rs.getTimestamp("posts.created_at"));
 						model2.setUpdatedAt(rs.getTimestamp("posts.updated_at"));
 						model2.setPostUserName(rs.getString("accounts.name"));
 						
@@ -100,6 +117,12 @@ public class PostDAO {
 		return posts;
 	}
 	
+	/**
+	 * accountモデルのidでpostデータを探しリストを返す
+	 * @param conn
+	 * @param model id
+	 * @return account_idが一致するpostデータのリスト
+	 */
 	public List<PostModel> findByAccountId(Connection conn, AccountModel model) {
 		List<PostModel> posts = new ArrayList<PostModel>();
 		try {
@@ -138,6 +161,13 @@ public class PostDAO {
 		return posts;
 	}
 	
+	/**
+	 * postモデルのidがto_idと一致するpostデータのリストを返す
+	 * 
+	 * @param conn
+	 * @param model id
+	 * @return to_idと一致するpostデータ
+	 */
 	public List<PostModel> findByReply(Connection conn, PostModel model) {
 		List<PostModel> posts = new ArrayList<PostModel>();
 		try {
@@ -176,6 +206,13 @@ public class PostDAO {
 		return posts;
 	}
 	
+	/**
+	 * モデルのidとgood_tableが一致し、is_goodが1のpostデータのリストを返す
+	 * 
+	 * @param conn
+	 * @param model id
+	 * @return good_tableのaccount_idと一致してis_goodが1のpostデータのリスト
+	 */
 	public List<PostModel> findByAccountIdIsGood(Connection conn, AccountModel model) {
 		List<PostModel> posts = new ArrayList<PostModel>();
 		try {
@@ -237,6 +274,13 @@ public class PostDAO {
 		return posts;
 	}
 	
+	/**
+	 * モデルのidでpostデータを探して返す
+	 * 
+	 * @param conn
+	 * @param model id
+	 * @return postデータ
+	 */
 	public PostModel findOne(Connection conn, PostModel model) {
 		try {
 			String sql = baseSQL
@@ -270,8 +314,13 @@ public class PostDAO {
 		}
 		return model;
 	}
-	
-	public int createPost(Connection conn, PostModel model) {
+	/**
+	 * モデルのaccountId,itemの内容でpostデータを追加する
+	 * 
+	 * @param conn
+	 * @param model accountId, item
+	 */
+	public void createPost(Connection conn, PostModel model) {
 		try {
 			String sql = "insert into posts (account_id, item) values (?, ?)";
 			
@@ -283,13 +332,16 @@ public class PostDAO {
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
-			
-			return e.getErrorCode();
 		}
-		return 1;
 	}
 	
-	public int createReply(Connection conn, PostModel model) {
+	/**
+	 * モデルのaccountId, item, to_idでpostデータを追加する
+	 * 
+	 * @param conn
+	 * @param model id, item, to_id
+	 */
+	public void createReply(Connection conn, PostModel model) {
 		try {
 			String sql = "insert into posts (account_id, item, to_id) values (?, ?, ?)";
 			
@@ -302,12 +354,15 @@ public class PostDAO {
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
-			
-			 return e.getErrorCode();
 		}
-		return 1;
 	}
 	
+	/**
+	 * モデルのidと一致するpostデータを削除する
+	 * 
+	 * @param conn
+	 * @param model id
+	 */
 	public void deletePost(Connection conn, PostModel model) {
 		try {
 			String sql = "update posts set is_deleted=1 where id=?";

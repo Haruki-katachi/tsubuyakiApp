@@ -73,6 +73,10 @@ public class LoginServlet extends HttpServlet {
 			return;
 		} catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			
+			request.setAttribute("error", "エラーが発生しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+			dispatcher.forward(request, response);
 			return;
 		}
 	}
